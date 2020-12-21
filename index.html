@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> rock paper scissors</title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+
+        <div id= "gold">
+            <h1> Rock Paper Scissors GAME</h1>
+            <p>HUMAN VS COMPUTER <br>The first to reach a score of 5<p>
+            <P> WHO IS GONNA WIN!!</P>
+        </div><br>
+        <div id="container">
+            <button data-button ="rock" id="1">rock</button>
+            <button data-button="paper" id="2">paper</button>
+            <button data-button="scissors" id="scissors">scissors </button>
+        </div>
+
+        <div id ="dodo"></div>
+        <div id ="nono"></div><br>
+
+        <div id = "content">    
+            <div id = "board"></div><br>
+            <div id = "comp"></div><br>
+            <div id = "player"></div>
+        </div>
+</body>
+        
+
+    
+    <script>
+        
+        let computerScore=0;
+        let playerScore=0;
+
+        function computerPlay(){
+        pick = Math.floor(Math.random() * Math.floor(3))
+        if (pick == 0){
+            return "rock";
+        }
+        else if (pick == 1){
+            return "paper";
+        }
+        return "scissors";
+        }
+        
+        
+        function PlayRound(){
+            let computerSelection = computerPlay();
+            let playerSelection = this.dataset.button;
+            if (computerSelection == playerSelection){
+                displayResults('Tie game!!!');
+                displayScore();
+            }else if(computerSelection == 'rock' && playerSelection == 'scissors'){
+                displayResults('Computer wins');
+                computerScore++;
+                displayScore();
+            }else if(computerSelection == 'scissors' && playerSelection == 'rock'){
+                displayResults('You win');
+                playerScore++;
+                displayScore();
+            }else if(computerSelection == 'paper' && playerSelection == 'rock'){
+                displayResults('computer wins');
+                computerScore++;
+                displayScore();
+            }else if(computerSelection == 'rock' && playerSelection == 'paper'){
+                displayResults('you win');
+                playerScore++;
+                displayScore();
+            }else if(computerSelection == 'paper' && playerSelection == 'scissors'){
+                displayResults('you win');
+                playerScore++
+                displayScore();
+            }else{
+                displayResults('computer wins');
+                computerScore++;
+                displayScore();
+            }
+            
+            checkResult();
+            
+        };
+        function displayResults(str) {
+            nono.animate([{ opacity: 0 }, { opacity: 1 }], {
+                duration: 300,
+                fill: "forwards",
+                iterations: 1,
+                delay: 0,
+                easing: "ease-out",
+            });
+            nono.textContent = str;
+            }
+        
+        function displayScore(){
+                let x = playerScore;
+                let y = computerScore;
+                board.textContent = 'SCORE-BOARD';
+                comp.textContent =  'computer :' + ' ' + y;
+                player.textContent = 'player :' + ' ' + x;
+            };
+        
+        function checkResult(){
+                if (playerScore == 5 || computerScore == 5) {
+                declareWinner();
+                const buttons = document.querySelectorAll('button');
+                buttons.forEach((button) => {
+                button.removeEventListener('click', PlayRound)
+                });
+            }
+            };
+            
+        function declareWinner() {
+            if (playerScore > computerScore) {
+                dodo.textContent = "You win! Mankind lives another day!!";
+                var button = document.createElement("button");
+                button.innerText = "Play Again";
+                var body = document.getElementsByTagName("body")[0];
+                body.appendChild(button);
+                button.addEventListener ("click", refreshPage);
+            } else {
+                dodo.textContent = "You lost...who will save mankind now?";
+                var button = document.createElement("button");
+                button.innerText = "Try Again?";
+                var body = document.getElementsByTagName("body")[0];
+                body.appendChild(button);
+                button.addEventListener ("click", refreshPage);
+                
+            }
+            
+            };
+              
+            function refreshPage(){
+                window.location.reload();
+            }
+                        
+
+
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach((button) => {
+        button.addEventListener('click', PlayRound)
+        });
+       
+
+        
+    </script>
+</html>

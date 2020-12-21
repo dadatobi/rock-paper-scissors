@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> rock paper scissors</title>
+    </head>
+    <body>
+    </body>
+    <script>
+        let computerScore=0;
+        let playerScore=0;
+
+        function computerPlay(){
+        pick = Math.floor(Math.random() * Math.floor(3))
+        if (pick == 0){
+            return "rock";
+        }
+        else if (pick == 1){
+            return "paper";
+        }
+        return "scissors";
+    }
+        
+        
+        function PlayRound(){
+            let computerSelection = computerPlay();
+            let playerS = prompt('enter either "rock", "paper", "scissors", to play this game', '');
+            let playerSelection = playerS.toLowerCase();
+            if (computerSelection == playerSelection){
+                alert('Tie game!!!');
+                console.log('Tie game!!!');
+            }else if(computerSelection == 'rock' && playerSelection == 'scissors'){
+                alert('Computer wins');
+                console.log('Computer wins');
+                computerScore++;
+            }else if(computerSelection == 'scissors' && playerSelection == 'rock'){
+                alert('You win');
+                console.log('You win');
+                playerScore++;
+            }else if(computerSelection == 'paper' && playerSelection == 'rock'){
+                alert('computer wins');
+                console.log('Computer wins');
+                computerScore++;
+            }else if(computerSelection == 'rock' && playerSelection == 'paper'){
+                alert('you win');
+                console.log('You win');
+                playerScore++;
+            }else if(computerSelection == 'paper' && playerSelection == 'scissors'){
+                alert('you win');
+                console.log('You win');
+                playerScore++
+            }else{
+                alert('computer wins');
+                console.log('Computer wins');
+                computerScore++;
+            }
+        };
+        
+
+        function game(){
+            PlayRound();
+            PlayRound();
+            PlayRound();
+            PlayRound();
+            PlayRound();
+            if(computerScore > playerScore){
+                alert('computer win the round');
+                console.log('computer win the round');
+            }else if(computerScore == playerScore){
+                alert('a tie');
+                console.log('a tie');
+            }else{
+                alert('you win the round');
+                console.log('you win the round');
+            }
+        };
+        
+        game();
+    </script>
+</html>
